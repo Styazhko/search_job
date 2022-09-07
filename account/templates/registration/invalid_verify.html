@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <h1 class="h3 mb-3 font-weight-normal">JobSearch</h1>
+    <p class="h5 font-weight-light">Завершение регистрации</p>
+</div>
+<div class="mt-5 form-label-group">
+    <p>Ваша ссылка не действительна, попробуйте войти снова!</p>
+</div>
+<div class="mt-4 text-center"><a href="{% url 'login' %}">Войти</a></p></div>
+{% endblock %}

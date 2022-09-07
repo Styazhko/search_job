@@ -1,0 +1,53 @@
+{% extends 'account_profile_base.html' %}
+{% load crispy_forms_tags %}
+{% block head %}
+<head>
+  <meta charset="UTF-8">
+  <title>Моя компания | JobSearch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #F6F2E6;
+    }
+  </style>
+</head>
+{% endblock %}
+{% block content %}
+<main class="container mt-3 pb-5">
+  <div class="row mt-5">
+    <div class="col-12 col-lg-4">
+      <aside class="pt-3 pb-4 px-4 mb-5 card">
+        <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+        <div class="nav flex-column nav-pills">
+          <a class="nav-link" href="{% url 'edit_company' %}">1. Информация о компании</a>
+          <a class="nav-link active" href="{% url 'my_vacancies' %}">2. Вакансии</a>
+        </div>
+      </aside>
+    </div>
+    <div class="col-12 col-lg-8">
+      <div class="card">
+        <div class="card-body px-4 pb-4">
+          <section class="tab-pane fade show active">
+            <h2 class="h4 pt-2 pb-3">Информация о&nbsp;компании</h2>
+            {% if messages %}
+            <p class="alert alert-info" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+            </p>
+            {% endif %}
+            <form action="{% url 'create_vacancy' %}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+            </div>
+                <input type="submit" class="btn btn-info" value="Сохранить">
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

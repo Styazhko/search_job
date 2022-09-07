@@ -1,0 +1,32 @@
+{% extends 'account_profile_base.html' %}
+{% load crispy_forms_tags %}
+{% block head %}
+<head xmlns="http://www.w3.org/1999/html">
+  <meta charset="UTF-8">
+  <title>Моя компания | JobSearch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #F6F2E6;
+    }
+  </style>
+</head>
+{% endblock %}
+{% block content %}
+<main class="container mt-3 pb-5">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class=" h-100 d-flex justify-content-center align-items-center">
+                <div>
+                    <form method="post">{% csrf_token %}
+                        <p>Вы уверены, что хотите удалить вакансию: "{{ object }}"?</p>
+                        <input type="submit" class="btn btn-info" value="Удалить">
+                        <a href="{% url 'my_vacancies' %}" class="btn btn-info">Назад</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
