@@ -85,11 +85,12 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'TEST': {
-            'NAME': 'searchjob_test',
-        },
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
 
@@ -141,4 +142,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_COMPANY_IMAGE_DIR = 'company_images'
-MEDIA_SPECIALITY_IMAGE_DIR = 'speciality_images'
+MEDIA_SPECIALITY_IMAGE_DIR = 'specialty'
