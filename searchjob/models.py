@@ -7,7 +7,7 @@ from django.db import models
 class Company(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название компании')
     location = models.CharField(max_length=64, verbose_name='Местоположение')
-    logo = models.ImageField(upload_to='company/%Y-%m-%d/', blank=True, null=True,verbose_name='Изображение')
+    logo = models.ImageField(upload_to='company/%Y-%m-%d/', blank=True, null=True, verbose_name='Изображение')
     description = models.TextField(verbose_name='Информация о компании')
     employee_count = models.IntegerField(verbose_name='Количество сотрудников')
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE, related_name='company')
@@ -52,6 +52,7 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.title_vacancy
+
 
 
 class Response(models.Model):

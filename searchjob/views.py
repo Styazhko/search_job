@@ -1,11 +1,12 @@
 import random
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Count, Q
-from django.http import Http404, HttpResponseNotFound, HttpResponseServerError
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse_lazy
+from django.http import Http404, HttpResponseNotFound, HttpResponseServerError, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, DetailView, ListView
 from django.views.generic.edit import BaseFormView, DeleteView, UpdateView, CreateView
 
@@ -83,7 +84,7 @@ class VacancyDetailView(SuccessMessageMixin, BaseFormView, DetailView):
     #     return self.request.path
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(VacancyDetailView, self).get_context_data(**kwargs)
         context['already_respond'] = (
             Response.objects.filter(
                 vacancy_id=self.kwargs['pk'],
@@ -157,11 +158,13 @@ class CompanyEditView(UserHasCompany, SuccessMessageMixin, UpdateView):
         return self.request.user.company
 
 
-class VacanciesListView(ListView):
+class VacanciesListView(LoginRequiredMixin, ListView):
     model = Vacancy
+    login_url = '/login/'
     template_name = 'my_vacancies.html'
     context_object_name = 'my_vacancies'
     paginate_by = 5
+
 
     def get_queryset(self):
         return Vacancy.objects.filter(company=self.request.user.pk)
@@ -170,7 +173,6 @@ class VacanciesListView(ListView):
         context = super().get_context_data()
         context['response'] = Response.objects.all()
         return context
-
 
 
 class VacancyCreateView(CreateView):
