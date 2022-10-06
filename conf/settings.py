@@ -150,5 +150,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-MEDIA_COMPANY_IMAGE_DIR = 'company_images'
+MEDIA_COMPANY_IMAGE_DIR = 'company'
 MEDIA_SPECIALITY_IMAGE_DIR = 'specialty'
