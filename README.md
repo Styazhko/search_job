@@ -85,6 +85,6 @@ sudo docker-compose up -d
 3. Остановка работы контейнеров:
 
 ````
-sudo docker-compose up -d
+sudo docker-compose stop
 ````
 
